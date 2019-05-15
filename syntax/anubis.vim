@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language   : Anubis
 " Maintainers: Matthieu Herrmann
-" Last Change: 2014 September
+" Last Change: mer. 15 mai 2019 11:09:49  AEST
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
@@ -135,21 +135,19 @@ syn cluster anubis contains=@aKW,@aConst,@aId,@aOp,@aComment
 " ----- PARAGRAPHS:
 " -- Paragraph starts. Order matters !
 " --- Coloration for start
-syn match aStartError     contained   "."
 syn match aStartPub       contained   display "^\<[Pp]ublic\>"
 syn match aStartPub       contained   display "^\<[Gg]lobal\>"
 syn match aStartDefine    contained   display "\<[Dd]efine\>"
 syn match aStartType      contained   display "\<[Tt]ype\>"
 syn match aStartMacro     contained   display "\<macro\>"
 syn match aStartInline    contained   display "\<inline\>"
-hi link aStartError   Error
 hi link aStartPub     Label
 hi link aStartDefine  Define
 hi link aStartType    Define
 hi link aStartMacro   Macro
 hi link aStartInline  Macro
 " -- Cluster
-syn cluster aStart contains=aStartError,aStartPub,aStartDefine,aStartType,aStartMacro,aStartInline
+syn cluster aStart contains=aStartPub,aStartDefine,aStartType,aStartMacro,aStartInline
 
 " ----- TYPE
 syn match aTypeParStart contained "^\([Pp]ublic\_s*\)\=[Tt]ype" contains=@aStart nextgroup=aTypeBody
