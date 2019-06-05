@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language   : Anubis
 " Maintainers: Matthieu Herrmann
-" Last Change: mer. 15 mai 2019 11:09:49  AEST
+" Last Change: mer. 05 juin 2019 04:52:26  AEST
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
@@ -109,20 +109,18 @@ syn cluster aOp contains=aShortOp,aLongOp,aFunOp,aMatchOver
 syn match   aCommentTodo    contained display "\([Tt]odo\|TODO\):"
 syn match   aCommentTodo    contained display "\([Nn]ote\|NOTE\):"
 syn match   aCommentTodo    contained display "\([Ww]arning\|WARNING\):"
-syn match   aCommentUnder   contained display  "\*\*.*\*\*"
 hi link aCommentTodo    TODO
-hi link aCommentUnder   Underlined
 " -- Main comment out of any paragraphs
-syn match aMainComment "^\s.*$"  contains=@Spell,aCommentTodo,aCommentUnder
+syn match aMainComment "^\s.*$"  contains=@Spell,aCommentTodo
 hi link aMainComment Comment
 " -- Comment at the end of a paragraph
  " syn match aEndComment contained  display "\s*\(\.\|:\(\_s*\.\.\.\)\?\)\zs\s*\(//.*\)\?$" contains=@Spell
 " hi link aEndComment Comment
 " -- One line // comment inside paragraphs
-syn match aParComment  extend "//.*$" contains=@Spell,aCommentTodo,aCommentUnder
+syn match aParComment  extend "//.*$" contains=@Spell,aCommentTodo
 hi link aParComment Comment
 " -- /* */ comments
-syn region aMultiComment extend start='/\*' matchgroup=Comment end='\*/' contains=aMultiComment,@Spell,aCommentTodo,aCommentUnder
+syn region aMultiComment extend start='/\*' matchgroup=Comment end='\*/' contains=aMultiComment,@Spell,aCommentTodo
 hi link aMultiComment Comment
 " -- Special coloration inside comments
 " -- Cluster
@@ -163,7 +161,7 @@ syn region aDefineBody contained start="." matchgroup=SpecialChar end="\s*\.\ze\
 syn match   aRead         display   skipwhite "^[Rr]ead\|^[Tt]ransmit" nextgroup=aReadPath
 syn match   aRead         display   skipwhite "^[Rr]eplaced\s+by" nextgroup=aReadPath
 syn match   aReadPath     display   skipwhite contained "\s*[/\._a-zA-Z0-9-]*" nextgroup=aReadComment
-syn match   aReadComment  display   contained ".*$" contains=@Spell,aCommentTodo,aCommentUnder
+syn match   aReadComment  display   contained ".*$" contains=@Spell,aCommentTodo
 hi link aReadPath    Identifier
 hi link aReadComment Comment
 hi link aRead        Include
