@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language   : Anubis
 " Maintainers: Matthieu Herrmann
-" Last Change: 2014 September
+" Last Change: 2021 Feb
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
@@ -109,15 +109,9 @@ syn cluster aOp contains=aShortOp,aLongOp,aFunOp,aMatchOver
 syn match   aCommentTodo    contained display "\([Tt]odo\|TODO\):"
 syn match   aCommentTodo    contained display "\([Nn]ote\|NOTE\):"
 syn match   aCommentTodo    contained display "\([Ww]arning\|WARNING\):"
-syn match   aCommentUnder   contained display  "\*\*.*\*\*"
 hi link aCommentTodo    TODO
-hi link aCommentUnder   Underlined
 " -- Main comment out of any paragraphs
-
-"syn include @MAML syntax/maml.vim
-"syn region mamlRegion start=+\$begin+ keepend end=+\$end+ contains=@MAML contained
-"
-syn match aMainComment "^\s.*$"  contains=@Spell,aCommentTodo,mamlRegion
+syn match aMainComment "^\s.*$"  contains=@Spell,aCommentTodo
 hi link aMainComment Comment
 
 
@@ -128,10 +122,10 @@ hi link aMainComment Comment
  " syn match aEndComment contained  display "\s*\(\.\|:\(\_s*\.\.\.\)\?\)\zs\s*\(//.*\)\?$" contains=@Spell
 " hi link aEndComment Comment
 " -- One line // comment inside paragraphs
-syn match aParComment  extend "//.*$" contains=@Spell,aCommentTodo,aCommentUnder
+syn match aParComment  extend "//.*$" contains=@Spell,aCommentTodo
 hi link aParComment Comment
 " -- /* */ comments
-syn region aMultiComment extend start='/\*' matchgroup=Comment end='\*/' contains=aMultiComment,@Spell,aCommentTodo,aCommentUnder
+syn region aMultiComment extend start='/\*' matchgroup=Comment end='\*/' contains=aMultiComment,@Spell,aCommentTodo
 hi link aMultiComment Comment
 " -- Special coloration inside comments
 " -- Cluster
@@ -144,7 +138,6 @@ syn cluster anubis contains=@aKW,@aConst,@aId,@aOp,@aComment
 " ----- PARAGRAPHS:
 " -- Paragraph starts. Order matters !
 " --- Coloration for start
-syn match aStartError     contained   "."
 syn match aStartPub       contained   display "^\<[Pp]ublic\>"
 syn match aStartPub       contained   display "^\<[Gg]lobal\>"
 syn match aStartPub       contained   display "^\<[Mm]odule\>"
@@ -152,14 +145,13 @@ syn match aStartDefine    contained   display "\<[Dd]efine\>"
 syn match aStartType      contained   display "\<[Tt]ype\>"
 syn match aStartMacro     contained   display "\<macro\>"
 syn match aStartInline    contained   display "\<inline\>"
-hi link aStartError   Error
 hi link aStartPub     Label
 hi link aStartDefine  Define
 hi link aStartType    Define
 hi link aStartMacro   Macro
 hi link aStartInline  Macro
 " -- Cluster
-syn cluster aStart contains=aStartError,aStartPub,aStartDefine,aStartType,aStartMacro,aStartInline
+syn cluster aStart contains=aStartPub,aStartDefine,aStartType,aStartMacro,aStartInline
 
 " ----- TYPE
 syn match aTypeParStart contained "^\([Pp]ublic\_s*\)\=[Tt]ype" contains=@aStart nextgroup=aTypeBody
@@ -175,7 +167,7 @@ syn region aDefineBody contained start="." matchgroup=SpecialChar end="\s*\.\ze\
 syn match   aRead         display   skipwhite "^[Rr]ead\|^[Tt]ransmit" nextgroup=aReadPath
 syn match   aRead         display   skipwhite "^[Rr]eplaced\s+by" nextgroup=aReadPath
 syn match   aReadPath     display   skipwhite contained "\s*[/\._a-zA-Z0-9-]*" nextgroup=aReadComment
-syn match   aReadComment  display   contained ".*$" contains=@Spell,aCommentTodo,aCommentUnder
+syn match   aReadComment  display   contained ".*$" contains=@Spell,aCommentTodo
 hi link aReadPath    Identifier
 hi link aReadComment Comment
 hi link aRead        Include
