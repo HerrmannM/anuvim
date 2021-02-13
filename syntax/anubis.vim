@@ -161,6 +161,8 @@ syn region aTypeBody contained start="." matchgroup=SpecialChar end="\s*\(\.\|:\
 " ----- DEFINE
 syn match aDefineParStart contained "^\([Pp]ublic\_s*\|[Gg]lobal\_s*\)\=[Dd]efine\_s*\(macro\|inline\)\=" contains=@aStart nextgroup=aDefineBody
 syn region aDefinePar start="^\([Pp]ublic\_s*\|[Gg]lobal\_s*\)\=[Dd]efine\_s*\(macro\|inline\)\=" end="\s*\.\ze\s*\(//.*\)\=$" transparent contains=aDefineParStart keepend
+syn match aDefineParStart contained "^[Mm]odule\_s*" contains=@aStart nextgroup=aDefineBody
+syn region aDefinePar start="^[Mm]odule\_s*" end="\s*\.\ze\s*\(//.*\)\=$" transparent contains=aDefineParStart keepend
 syn region aDefineBody contained start="." matchgroup=SpecialChar end="\s*\.\ze\s*\(//.*\)\=$" contains=@anubis keepend
 
 " ----- READ/TRANSMIT
