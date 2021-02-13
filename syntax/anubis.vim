@@ -21,7 +21,7 @@ syn keyword aPredefPrivate    contained   +++vcopy +++type_desc +++serialize +++
 syn keyword aPredefPrivate    contained   +++tempunserialize +++Listener +++StructPtr +++avm
 hi link aPredefPrivate    PreProc
 " -- Terms
-syn keyword aTermCond         contained   since is if then else
+syn keyword aTermCond         contained   since is if then else ensure otherwise
 syn keyword aTermTodo         contained   todo
 syn keyword aTermSNH          contained   should_not_happen
 syn keyword aTermOther        contained   with terminal
@@ -113,8 +113,17 @@ syn match   aCommentUnder   contained display  "\*\*.*\*\*"
 hi link aCommentTodo    TODO
 hi link aCommentUnder   Underlined
 " -- Main comment out of any paragraphs
-syn match aMainComment "^\s.*$"  contains=@Spell,aCommentTodo,aCommentUnder
+
+"syn include @MAML syntax/maml.vim
+"syn region mamlRegion start=+\$begin+ keepend end=+\$end+ contains=@MAML contained
+"
+syn match aMainComment "^\s.*$"  contains=@Spell,aCommentTodo,mamlRegion
 hi link aMainComment Comment
+
+
+
+
+
 " -- Comment at the end of a paragraph
  " syn match aEndComment contained  display "\s*\(\.\|:\(\_s*\.\.\.\)\?\)\zs\s*\(//.*\)\?$" contains=@Spell
 " hi link aEndComment Comment
@@ -138,6 +147,7 @@ syn cluster anubis contains=@aKW,@aConst,@aId,@aOp,@aComment
 syn match aStartError     contained   "."
 syn match aStartPub       contained   display "^\<[Pp]ublic\>"
 syn match aStartPub       contained   display "^\<[Gg]lobal\>"
+syn match aStartPub       contained   display "^\<[Mm]odule\>"
 syn match aStartDefine    contained   display "\<[Dd]efine\>"
 syn match aStartType      contained   display "\<[Tt]ype\>"
 syn match aStartMacro     contained   display "\<macro\>"
